@@ -13,7 +13,7 @@ h1{
     text-shadow: 0 5px 15px black;
 }
 form{
-    width:350px;
+    width:380px;
     height: 500px;
     text-align: left;
     margin: auto;
@@ -41,6 +41,7 @@ form{
 button{
     border-radius: 5px;
 
+
    }
 
 .todoInput{
@@ -63,21 +64,20 @@ button{
     color: whitesmoke;
     background-color:  rgb(40, 142, 67);
 }
-.btn-list{
+.btn-controls{
     display: flex;;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 
 }
-.btn-list button{
-    border: none;
+.btn-controls button{
+    border: 1px solid rgb(40, 142, 67);
     font-size: 20px;
     background-color: rgb(40, 142, 67);
     color: whitesmoke;
     padding: 4px;
-    margin-left: 5px;
-    margin-top: 2px;
+    margin-top: 10px;
     font-weight: 500;
    
 }
@@ -115,7 +115,7 @@ li{
     font-weight: 600;
     cursor: pointer;
     width: 100%;
-    height:35px;
+    min-height:35px;
     padding-left: 10px;
     display: flex;
     justify-content: baseline;
