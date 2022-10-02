@@ -7,9 +7,16 @@ const elBtnAllChild = document.querySelector('.all>strong');
 const elBtnCompChild = document.querySelector('.completed>strong');
 const elBtnUnCompChild = document.querySelector('.unCompleted>strong');
 const elBtnDelCompleted = document.querySelector('.delCompleted');
+const localTodos=JSON.parse(window.localStorage.getItem('todos'))
+
 // Todo Arry
-const todos = [];
+const todos =localTodos || [];
 // Function's
+function updateTTodos(){
+    renderTodos(todos, elList);
+    window.localStorage.setItem('todos',JSON.stringify(todos));
+}
+updateTTodos()
 function renderTodos(arr, node) {
     let allTodo=todos.length;
     let completedTodo=todos.filter((evt)=>evt.isCompleted===true).length;
@@ -45,12 +52,12 @@ elList.addEventListener('click', (evt) => {
     if (todoValidation) {
         const foundTodoIndex = todos.findIndex(todo => todo.id === todoId)
         todos.splice(foundTodoIndex, 1);
-        renderTodos(todos, elList);
+        updateTTodos()
     } else if (todoCheck) {
         const todoId = Number(evt.target.dataset.todoId);
        const foundTodo = todos.find(todo => todo.id === todoId);
         foundTodo.isCompleted = !foundTodo.isCompleted;
-        renderTodos(todos, elList);
+        updateTTodos()
 }});
 
 elForm.addEventListener('submit', (evt) => {
@@ -63,8 +70,7 @@ elForm.addEventListener('submit', (evt) => {
             isCompleted: false
         }
         todos.push(newtodo);
-
-        renderTodos(todos, elList)
+        updateTTodos()
         elInput.value = null
     }
     else {
@@ -74,12 +80,12 @@ elForm.addEventListener('submit', (evt) => {
 elBtnControls.addEventListener('click',(evt)=>{
     const targetValue=evt.target;
     if(targetValue.matches('.all')){
-        renderTodos(todos, elList)
+        updateTTodos()
     }else if(targetValue.matches('.completed')){
         const foundTodo=todos.filter(todo=>todo.isCompleted===true);
-        renderTodos(foundTodo, elList);
+        updateTTodos()
     }else if(targetValue.matches('.unCompleted'))
     {
         const foundTodo=todos.filter(todo=>todo.isCompleted===false);
-        renderTodos(foundTodo, elList);
+        updateTTodos()
 }});
