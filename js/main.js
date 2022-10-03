@@ -8,7 +8,7 @@ const elBtnCompChild = document.querySelector('.completed>strong');
 const elBtnUnCompChild = document.querySelector('.unCompleted>strong');
 const elBtnDelCompleted = document.querySelector('.delCompleted');
 const localTodos=JSON.parse(window.localStorage.getItem('todos'))
-
+let todoFragment=document.createDocumentFragment();
 // Todo Arry
 const todos =localTodos || [];
 // Function's
@@ -17,6 +17,7 @@ function updateTTodos(){
     window.localStorage.setItem('todos',JSON.stringify(todos));
 }
 updateTTodos()
+
 function renderTodos(arr, node) {
     let allTodo=todos.length;
     let completedTodo=todos.filter((evt)=>evt.isCompleted===true).length;
@@ -42,8 +43,9 @@ function renderTodos(arr, node) {
             newLi.innerHTML = todo.title;
             newLi.appendChild(newCheckbox)
             newLi.appendChild(newBtn);
-            node.appendChild(newLi);
-}};
+            todoFragment.appendChild(newLi);
+}       node.appendChild(todoFragment);
+};
 // Button Event's
 elList.addEventListener('click', (evt) => {
     const todoValidation = evt.target.matches('.btn-del');
